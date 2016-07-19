@@ -13,3 +13,7 @@ Hello test
 
 git commit -m "First commit"
 git push
+
+git add --all
+git commit -am "<commit message>"
+git push
