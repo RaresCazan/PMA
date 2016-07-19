@@ -8,3 +8,5 @@ This is a repo for a starter appliation for a Single Page MEAN Stack application
 3. Install bower dependencies `bower install`
 4. Start up the server: `node server.js`
 5. View in browser at http://localhost:8080
+
+Hello test
