@@ -2,10 +2,11 @@
   "name": "starter-node-angular",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.5.1",
-    "mongoose": "~3.8.0",
     "body-parser": "~1.4.2",
-    "method-override": "~2.0.2"
+    "express": "~4.5.1",
+    "method-override": "~2.0.2",
+    "mongoose": "~3.8.0",
+    "yargs": "^4.8.1"
   },
   "scripts": {
     "start": "node server.js"
@@ -13,5 +14,22 @@
   "description": "This is a repo for a starter appliation for a Single Page MEAN Stack application. Just download and install and you have a good foundation for building application.",
   "version": "1.0.0",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-if": "^2.0.1",
+    "gulp-inject": "^4.1.0",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-less": "^3.1.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-print": "^2.0.1",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "wiredep": "^4.0.0"
+  }
 }
