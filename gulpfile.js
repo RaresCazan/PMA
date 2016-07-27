@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 var args = require('yargs').argv;
+var browserSync =  require('browser-sync');
 var config = require('./gulp.config')();
 var del =  require('del');
 var $ = require('gulp-load-plugins')({lazy: true});
+var port = process.env.PORT || config.defaultPort;
 
 gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
@@ -43,18 +45,115 @@ gulp.task('less-watcher', function(){
 //**********************************************************************************
 //* Html Inject - updates the page scripts  
 //* npm install --save -dev wiredep gulp-inject
+//* npm install --save-dev gulp-uglify    
 //**********************************************************************************
-gulp.task('wiredap', function(){
+gulp.task('wiredep', function(){
      log('Wire up the bower css js and our app js into the html');
     var options = config.getWiredepDefaultOptions();
     var wiredep =  require('wiredep').stream;
     return gulp
-        .src(config.index)
-        .pipe(wiredep(options))
+        .src(config.index) //where to add        
+        .pipe(wiredep(options)) //secify what to add
         .pipe($.inject(gulp.src(config.js)))
         .pipe(gulp.dest(config.client));
         
 })
+
+gulp.task('inject', ['wiredep'], function() {
+    log('Wire up the app css into the html, and call wiredep ');
+    var options = config.getWiredepDefaultOptions();
+    var wiredep =  require('wiredep').stream;
+    
+    return gulp
+        .src(config.index)
+        .pipe(wiredep(options))
+        .pipe($.inject(gulp.src(config.css)))
+        .pipe(gulp.dest(config.client));
+});
+
+//**********************************************************************************
+//* Prepare the dev environment -  
+//* npm install --save -dev wiredep gulp-nodemon
+//**********************************************************************************
+gulp.task('serve-dev', ['inject'], function() {
+    var isDev = true;
+
+    var nodeOptions = {
+        script: config.nodeServer,
+        delayTime: 1,
+        env: {
+            'PORT': port,
+            'NODE_ENV': isDev ? 'dev' : 'build'
+        },
+        watch: [config.server]
+    };
+
+    return $.nodemon(nodeOptions)
+        .on('restart', function(ev) {
+            log('*** nodemon restarted');
+            log('files changed on restart:\n' + ev);
+            setTimeout(function() {
+                browserSync.notify('reloading now ...');
+                browserSync.reload({stream: false});
+            }, config.browserReloadDelay);
+        })
+        .on('start', function() {
+            log('*** nodemon started');
+            startBrowserSync();
+        })
+        .on('crash', function() {
+            log('*** nodemon crashed: script crashed for some reason');
+        })
+        .on('exit', function() {
+            log('*** nodemon exited cleanly');
+        });
+});
+
+//**********************************************************************************
+//* Server Dev - monitor all the files
+//* 
+//* npm install browser-sync --save-dev Browser in sync
+//**********************************************************************************
+
+function changeEvent(event) {
+    var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+    log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
+}
+
+function startBrowserSync() {
+    if (args.nosync || browserSync.active) {
+        return;
+    }
+
+    log('Starting browser-sync on port ' + port);
+
+    gulp.watch([config.less], ['styles'])
+        .on('change', function(event) { changeEvent(event); });
+
+    var options = {
+        proxy: 'localhost:' + port,
+        port: 3000,
+        files: [
+            config.client + '**/*.*',
+            '!' + config.less,
+            config.temp + '**/*.css'
+        ],
+        ghostMode: {
+            clicks: true,
+            location: false,
+            forms: true,
+            scroll: true
+        },
+        injectChanges: true,
+        logFileChanges: true,
+        logLevel: 'debug',
+        logPrefix: 'gulp-patterns',
+        notify: true,
+        reloadDelay: 0 //1000
+    };
+
+    browserSync(options);
+}
 
 
 //**

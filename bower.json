@@ -1,9 +1,12 @@
 {
-	"name": "angular",
-	"version": "1.0.0",
-	"dependencies": {
-		"bootstrap": "latest",
-		"angular": "latest",
-		"angular-route": "latest"	
-	}
+  "name": "angular",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular-messages": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "ngstorage": "^0.3.10",
+    "angular": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "bootstrap-css": "^3.3.6"
+  }
 }
