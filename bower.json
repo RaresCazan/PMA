@@ -7,6 +7,8 @@
     "ngstorage": "^0.3.10",
     "angular": "^1.5.8",
     "angular-mocks": "^1.5.8",
-    "bootstrap-css": "^3.3.6"
+    "bootstrap-css": "^3.3.6",
+    "angular-toastr": "^2.0.0",
+    "AngularJS-Toaster": "angularjs-toaster#^2.0.0"
   }
 }

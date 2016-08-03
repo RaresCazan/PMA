@@ -1,11 +1,11 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('Login.IndexController', Controller);
 
-    function Controller($location, AuthenticationService) {
+    function Controller($rootScope, $location, AuthenticationService) {
         var vm = this;
 
         vm.login = login;
@@ -17,10 +17,16 @@
             AuthenticationService.Logout();
         };
 
-        function login() {
+        function login() { 
             vm.loading = true;
+            $rootScope.isloggedIn = false;
+            $rootScope.test ="";
             AuthenticationService.Login(vm.username, vm.password, function (result) {
                 if (result === true) {
+                    $rootScope.isloggedIn = true;
+                    $rootScope.credentials = result.data;
+                    
+                    $rootScope.test = "hello test";
                     $location.path('/');
                 } else {
                     vm.error = 'Username or password is incorrect';

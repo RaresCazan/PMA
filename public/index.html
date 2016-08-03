@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <title>AngularJS JWT Authentication Example & Tutorial</title>
+    <title>PMA</title>
     <!--
         bower install bootstrap-css --save
     -->
     <!-- bower:css -->
     <link rel="stylesheet" href="libs/bootstrap-css/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="libs/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="libs/AngularJS-Toaster/toaster.css" />
     <!-- endbower -->
     
-    <!--link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
 
     <!-- application css -->
     <!--<link href="app-content/app.css" rel="stylesheet" />-->    
     
     <!-- inject:css -->
     <link rel="stylesheet" href="/public/app-content/app.css">
+    <link rel="stylesheet" href="/public/app-content/bootstrap.cerulean.min.css">
     <!-- endinject -->
 </head>
 <body>
+     <!-- main app header -->
+    <span id="spanHeader" ng-show="isloggedIn">
+        <span ng-include = "'home/header.htm'" ng></span>        
+    </span>
     <!-- main app container -->
     <div class="jumbotron">
         <div class="container">
@@ -38,6 +45,7 @@
         bower install angular-ui-router --save
         bower install ngStorage --save
         bower install angular-mocks --save
+         bower install angular-toastr --save
     -->
     
     <!-- bower:js -->
@@ -47,14 +55,22 @@
     <script src="libs/ngstorage/ngStorage.js"></script>
     <script src="libs/angular-mocks/angular-mocks.js"></script>
     <script src="libs/bootstrap-css/js/bootstrap.min.js"></script>
+    <script src="libs/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="libs/angular-animate/angular-animate.js"></script>
+    <script src="libs/AngularJS-Toaster/toaster.js"></script>
     <!-- endbower -->
     
     <!-- inject:js -->
-    <script src="/public/app.js"></script>
-    <script src="/public/app-services/authentication.service.js"></script>
-    <script src="/public/app-helpers/fake-backend.js"></script>
-    <script src="/public/home/index.controller.js"></script>
-    <script src="/public/login/index.controller.js"></script>
+    <script src="app.js"></script>
+    <script src="app-helpers/fake-backend.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/dataService.js"></script>
+    <script src="app-services/notifier.js"></script>
+    <script src="controllers/AllActivitiesController.js"></script>
+    <script src="controllers/AllClassroomsController.js"></script>
+    <script src="controllers/AllSchoolsController.js"></script>
+    <script src="home/index.controller.js"></script>
+    <script src="login/index.controller.js"></script>
     <!-- endinject -->
     
     <!--<script src="libs/angular-messages/angular-messages.min.js"></script>

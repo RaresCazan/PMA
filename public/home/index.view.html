@@ -1,5 +1,14 @@
-﻿<div class="col-md-6 col-md-offset-3">
-    <h1>Home</h1>
+<div class="col-md-6 col-md-offset-3">
+  <div ui-view="classGridInfo"></div>
+ <h1>Home</h1>
+    {{vm.HelloMsg}} 
+    
+    {{ $rootScope.isloggedIn }} 
+    {{username}}
+    
     <p>You're logged in with JWT!!</p>
-    <p><a href="#/login">Logout</a></p>
+    <p><a href="#/login">Logout</a></p> 
 </div>
+
+
+

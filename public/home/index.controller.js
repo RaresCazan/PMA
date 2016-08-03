@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular
@@ -7,10 +7,13 @@
 
     function Controller() {
         var vm = this;
-
+        
+        vm.HelloMsg ="Hello User";
+        
         initController();
 
-        function initController() {
+        function initController($rootScope) {
+            
         }
     }
 

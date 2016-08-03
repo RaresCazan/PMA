@@ -1,45 +1,74 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html ng-app="app">
 <head>
-	<meta charset="UTF-8">
-	<base href="/">
+    <title>AngularJS JWT Authentication Example & Tutorial</title>
+    <!--
+        bower install bootstrap-css --save
+    -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="libs/bootstrap-css/css/bootstrap.min.css" />
+    <!-- endbower -->
+    
+    <!--<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">-->
 
-	<title>Starter Node and Angular</title>
-
-	<!-- CSS -->
-	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
-
-	<!-- JS -->
-	<script src="libs/angular/angular.min.js"></script>
-	<script src="libs/angular-route/angular-route.min.js"></script>
-
-	<!-- ANGULAR CUSTOM -->
-	<script src="js/controllers/MainCtrl.js"></script>
-	<script src="js/controllers/NerdCtrl.js"></script>
-	<script src="js/services/NerdService.js"></script>
-	<script src="js/controllers/GeekCtrl.js"></script>
-	<script src="js/services/GeekService.js"></script>
-	<script src="js/appRoutes.js"></script>
-	<script src="js/app.js"></script>
+    <!-- application css -->
+    <link href="app-content/app.css" rel="stylesheet" />    
+    
+    <!-- inject:css -->
+    <!--<link rel="stylesheet" href="/public/app-content/app.css">-->
+    <!-- endinject -->
 </head>
-<body ng-app="pmApp" ng-controller="NerdController">
-<div class="container">
-	{{2+2}} {{2+3}} {{1+1}}
-	<!-- HEADER -->
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">Stencil: Node and Angular</a>
-		</div>
-		<ul class="nav navbar-nav">
-			<li><a href="/nerds">Nerds</a></li>
-			<li><a href="/geeks">Geeks</a></li>
-		</ul>
-	</nav>
+<body>
+    <!-- main app container -->
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
 
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
 
-</div>
+    <!-- angular scripts -->
+    <!--<script src="libs/angular/angular.min.js"></script>-->
+    
+    <!--
+        bower update --save
+        bower install angular-messages --save
+        bower install angular-ui-router --save
+        bower install ngStorage --save
+        bower install angular-mocks --save
+    -->
+    
+    <!-- bower:js -->
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-messages/angular-messages.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="libs/ngstorage/ngStorage.js"></script>
+    <script src="libs/angular-mocks/angular-mocks.js"></script>
+    <!--<script src="libs/bootstrap-css/js/bootstrap.min.js"></script>-->
+    <!-- endbower -->
+    
+    <!-- inject:js -->
+    <script src="/public/app.js"></script>
+    <script src="/public/app-helpers/fake-backend.js"></script>
+    <script src="/public/app-services/authentication.service.js"></script>
+    <script src="/public/home/index.controller.js"></script>
+    <script src="/public/login/index.controller.js"></script>
+    <!-- endinject -->
+    
+    <!--<script src="libs/angular-messages/angular-messages.min.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>    
+    <script src="libs/ngStorage/ngStorage.min.js"></script>-->
+
+    <!-- application scripts -->
+   <!-- <script src="app.js"></script>
+    <script src="app-services/authentication.service.js"></script>
+    <script src="home/index.controller.js"></script>
+    <script src="login/index.controller.js"></script>-->
+
+    <!-- scripts for fake backend -->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-mocks.js"></script>-->
+    <!--<script src="app-helpers/fake-backend.js"></script>-->
 </body>
 </html>
